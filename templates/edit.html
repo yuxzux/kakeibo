@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>編集</h2>
+<form method="post" class="row g-3">
+  <div class="col-md-3">
+    <label for="date" class="form-label">日付</label>
+    <input type="date" class="form-control" id="date" name="date" value="{{ entry[1] }}" required>
+  </div>
+  <div class="col-md-3">
+    <label for="category" class="form-label">カテゴリ</label>
+    <select class="form-select" id="category" name="category" required>
+      <option value="食費" {% if entry[2]=='食費' %}selected{% endif %}>食費</option>
+      <option value="交通費" {% if entry[2]=='交通費' %}selected{% endif %}>交通費</option>
+      <option value="娯楽" {% if entry[2]=='娯楽' %}selected{% endif %}>娯楽</option>
+      <option value="給与" {% if entry[2]=='給与' %}selected{% endif %}>給与</option>
+      <option value="副収入" {% if entry[2]=='副収入' %}selected{% endif %}>副収入</option>
+      <option value="その他" {% if entry[2]=='その他' %}selected{% endif %}>その他</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label for="amount" class="form-label">金額</label>
+    <input type="number" class="form-control" id="amount" name="amount" value="{{ entry[3] }}" required>
+  </div>
+  <div class="col-md-3">
+    <label for="type" class="form-label">種別</label><br>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="type" id="shishutsu" value="支出" {% if entry[5]=='支出' %}checked{% endif %} required>
+      <label class="form-check-label" for="shishutsu">支出</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="type" id="shuunyuu" value="収入" {% if entry[5]=='収入' %}checked{% endif %} required>
+      <label class="form-check-label" for="shuunyuu">収入</label>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <label for="memo" class="form-label">メモ</label>
+    <input type="text" class="form-control" id="memo" name="memo" value="{{ entry[4] }}">
+  </div>
+  <div class="col-12">
+  <button type="submit" class="btn btn-main">更新</button>
+  </div>
+</form>
+{% endblock %}

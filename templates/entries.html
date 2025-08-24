@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>収支一覧</h2>
+<div class="mb-3">
+  <a href="?sort=date" class="btn btn-outline-secondary btn-sm">日付順</a>
+  <a href="?sort=category" class="btn btn-outline-secondary btn-sm">カテゴリ順</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>カテゴリ</th>
+      <th>金額</th>
+      <th>種別</th>
+      <th>メモ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in entries %}
+    <tr>
+      <td>{{ entry[1] }}</td>
+      <td>{{ entry[2] }}</td>
+      <td>{{ entry[3] }}</td>
+      <td>{{ entry[5] }}</td>
+      <td>{{ entry[4] }}</td>
+      <td>
+        <a href="/entry/{{ entry[0] }}/edit" class="btn btn-sm btn-sub">編集</a>
+        <form action="/entry/{{ entry[0] }}/delete" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-sm btn-main" onclick="return confirm('削除しますか？');">削除</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

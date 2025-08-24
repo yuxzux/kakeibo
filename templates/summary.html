@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>集計</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-3">
+  　　 <div class="card-header" style="background-color:var(--main-color);color:#fff;">月ごとの集計</div>
+      <div class="card-body">
+        <table class="table">
+          <thead><tr><th>月</th><th>種別</th><th>合計</th></tr></thead>
+          <tbody>
+            {% for m in monthly %}
+            <tr>
+              <td>{{ m[0] }}</td>
+              <td>{{ m[1] }}</td>
+              <td>{{ m[2] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-header" style="background-color:var(--main-color);color:#fff;">カテゴリごとの集計</div>
+      <div class="card-body">
+        <table class="table">
+          <thead><tr><th>カテゴリ</th><th>合計</th></tr></thead>
+          <tbody>
+            {% for c in category %}
+            <tr>
+              <td>{{ c[0] }}</td>
+              <td>{{ c[1] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <canvas id="categoryPie" width="300" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          var labels = {{ category | map(attribute=0) | list | tojson | safe }};
+          var data = {{ category | map(attribute=1) | list | tojson | safe }};
+          const colors = [
+            '#B3D056', '#005B47', '#F7C873', '#6EC6CA', '#F7A6B2', '#A6A6A6'
+          ];
+          new Chart(document.getElementById('categoryPie'), {
+            type: 'pie',
+            data: {
+              labels: labels,
+              datasets: [{
+                data: data,
+                backgroundColor: colors,
+                borderColor: '#fff',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: {
+                    color: '#005B47',
+                    font: { size: 14 }
+                  }
+                },
+                title: {
+                  display: true,
+                  text: 'カテゴリごとの割合',
+                  color: '#005B47',
+                  font: { size: 16 }
+                }
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

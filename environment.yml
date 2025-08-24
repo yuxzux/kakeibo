@@ -1,0 +1,12 @@
+name: kakeibo-app
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.12
+  - flask
+  - pytest
+  - sqlite
+  - pip
+  - pip:
+      - flask

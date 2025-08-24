@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# SQLite DB
+*.db
+*.sqlite3
+
+# 環境ファイル
+.env
+
+# ログ
+*.log
+
+# テストキャッシュ
+.pytest_cache/
+
+# その他
+*.bak
+*.swp
